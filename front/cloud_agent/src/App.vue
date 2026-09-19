@@ -232,7 +232,8 @@ const sendQuery = async (query: string) => {
 
     const reader = response.body?.getReader()
     const decoder = new TextDecoder('utf-8')
-    isLoading.value = false // 开始接收流，关闭 loading 状态
+    // 注意：StreamingResponse 会立即发出响应头，此时 Agent 推理尚未开始。
+    // loading 状态必须保持到第一个内容分片到达，否则界面会空白干等。
 
     if (reader) {
       let buffer = ''
@@ -253,6 +254,7 @@ const sendQuery = async (query: string) => {
             try {
               const data = JSON.parse(dataStr)
               if (data.content && messages.value[currentMsgIndex]) {
+                isLoading.value = false // 首个分片到达，交棒给流式内容
                 messages.value[currentMsgIndex].content += data.content
                 scrollToBottom()
               }
