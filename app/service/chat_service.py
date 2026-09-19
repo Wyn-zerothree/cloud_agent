@@ -38,6 +38,31 @@ async def init_agent_system():
         await semantic_cache.initialize()
         print("✅ Agent 系统初始化完成！")
 
+# 写入准入：只有纯产品咨询的回答才进公共缓存。账单/推广/推荐的回答里含用户私有数据
+# （实例 ID、专属返佣链接等），写进公共域会造成跨用户泄露，因此只对该用户生效。
+PUBLIC_SCOPE_AGENTS = {"product_agent"}
+CACHE_MIN_ANSWER_CHARS = 40
+# Milvus 的 VARCHAR max_length 以字节计，answer 字段上限 8192 字节；中文 UTF-8 占 3 字节
+CACHE_MAX_ANSWER_BYTES = 7800
+CACHE_MAX_QUESTION_BYTES = 1900
+CACHE_REJECT_MARKERS = ("发生错误", "查询失败", "暂不可用")
+
+
+async def _maybe_cache(query: str, answer: str, user_id: str, agent_name: str) -> None:
+    if not answer or len(answer) < CACHE_MIN_ANSWER_CHARS:
+        return
+    if any(marker in answer for marker in CACHE_REJECT_MARKERS):
+        return
+    if len(answer.encode("utf-8")) > CACHE_MAX_ANSWER_BYTES:
+        return
+    if len(query.encode("utf-8")) > CACHE_MAX_QUESTION_BYTES:
+        return
+    if agent_name in PUBLIC_SCOPE_AGENTS:
+        await semantic_cache.set_cache(query, answer)
+    else:
+        await semantic_cache.set_cache(query, answer, user_id=user_id)
+
+
 async def _extract_memory_context(user_id: str, session_id: str, query: str) -> str:
     context_parts = []
     if memory and memory.short_term.available:
@@ -79,7 +104,8 @@ async def stream_chat(query: str, user_id: str, session_id: str):
         config = {"configurable": {"user_id": user_id}}
         result = await asyncio.to_thread(asyncio.run, graph.ainvoke(state, config=config)) if not asyncio.iscoroutinefunction(graph.ainvoke) else await graph.ainvoke(state, config=config)
         response_text = result["messages"][-1].content
-    
+        await _maybe_cache(query, response_text, user_id, result.get("next_agent", ""))
+
     # 保存短时记忆
     if memory and memory.short_term.available:
         turn = [
