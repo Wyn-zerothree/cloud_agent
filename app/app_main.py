@@ -7,6 +7,16 @@ AGENT_DIR = os.path.join(os.path.dirname(APP_DIR), "agent")
 sys.path.insert(0, AGENT_DIR)
 sys.path.insert(0, APP_DIR)
 
+# Windows 中文环境控制台默认 GBK，本项目日志含 emoji，会触发 UnicodeEncodeError
+# 使进程启动即崩。统一改用 UTF-8；环境变量保证子进程（MCP stdio server）同样生效。
+os.environ.setdefault("PYTHONUTF8", "1")
+os.environ.setdefault("PYTHONIOENCODING", "utf-8")
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from contextlib import asynccontextmanager

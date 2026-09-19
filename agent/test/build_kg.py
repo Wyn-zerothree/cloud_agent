@@ -1,5 +1,16 @@
 import os
 import json
+import sys
+
+# Windows 中文环境控制台默认 GBK，本脚本日志含 emoji，会触发 UnicodeEncodeError
+os.environ.setdefault("PYTHONUTF8", "1")
+os.environ.setdefault("PYTHONIOENCODING", "utf-8")
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
 from typing import List
 from pydantic import BaseModel, Field
 from langchain_openai import ChatOpenAI

@@ -24,11 +24,14 @@ os.environ.setdefault("GRPC_TRACE", "")
 # 将父目录添加到导入路径
 sys.path.insert(0, str(Path(__file__).parent))
 
-# 确保所有平台上的 stdin/stdout 都使用 UTF-8（修复 macOS 终端中文输入问题）
-if hasattr(sys.stdin, 'reconfigure'):
-    sys.stdin.reconfigure(encoding='utf-8', errors='replace')
-if hasattr(sys.stdout, 'reconfigure'):
-    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+# 确保所有平台上的 stdin/stdout/stderr 都使用 UTF-8（修复 macOS 终端中文输入、
+# 以及 Windows GBK 控制台下日志含 emoji 导致 UnicodeEncodeError 的问题）。
+# 环境变量用于让子进程（MCP stdio server）继承同样的编码设置。
+os.environ.setdefault("PYTHONUTF8", "1")
+os.environ.setdefault("PYTHONIOENCODING", "utf-8")
+for _stream in (sys.stdin, sys.stdout, sys.stderr):
+    if hasattr(_stream, 'reconfigure'):
+        _stream.reconfigure(encoding='utf-8', errors='replace')
 
 from config import get_settings
 from core.memory import MemoryManager

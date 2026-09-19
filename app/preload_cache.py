@@ -7,6 +7,15 @@ PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 if PROJECT_DIR not in sys.path:
     sys.path.append(PROJECT_DIR)
 
+# Windows 中文环境控制台默认 GBK，本脚本日志含 emoji，会触发 UnicodeEncodeError
+os.environ.setdefault("PYTHONUTF8", "1")
+os.environ.setdefault("PYTHONIOENCODING", "utf-8")
+for _stream in (sys.stdout, sys.stderr):
+    try:
+        _stream.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
 from infra.cache import semantic_cache
 
 # 预设的 QA 列表 (包含退款规则、欠费停机等高频标准问题)
