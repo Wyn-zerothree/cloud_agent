@@ -1,11 +1,11 @@
 import os
-import json
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langgraph.prebuilt import create_react_agent
 from langchain_mcp_adapters.client import MultiServerMCPClient
 from typing import Dict, Any
 
+from core.mcp.mcp_manager import load_mcp_servers
 from core.workflow.state import AgentState
 from agents.billing_agent import UserIdInjector
 
@@ -26,8 +26,7 @@ class FinOpsAgentNode:
         )
         
         config_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'config', 'mcp_servers.json')
-        with open(config_path, 'r', encoding='utf-8') as f:
-            self.servers_config = json.load(f)
+        self.servers_config = load_mcp_servers(config_path)
 
     async def _ensure_tools(self):
         pass

@@ -1,6 +1,7 @@
 
 import json
 import logging
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -8,6 +9,28 @@ from langchain_core.tools import BaseTool
 from langchain_mcp_adapters.client import MultiServerMCPClient
 
 logger = logging.getLogger(__name__)
+
+
+def load_mcp_servers(config_path: str | Path) -> dict[str, Any]:
+    """读取 MCP 服务器配置，并把 command / cwd 解析为当前环境的值。
+
+    配置文件里这两个字段只作占位：command 一律替换为当前解释器（即启动本项目的
+    那个 venv 里的 python），cwd 固定为 agent 目录。这样同一份配置在不同机器、
+    不同虚拟环境路径下都能直接用，不必写死任何本机路径。
+    """
+    path = Path(config_path)
+    if not path.exists():
+        raise FileNotFoundError(f"MCP config not found: {path}")
+
+    with open(path, "r", encoding="utf-8") as f:
+        config: dict[str, Any] = json.load(f)
+
+    agent_root = path.resolve().parent.parent
+    servers = {
+        name: {**server, "command": sys.executable, "cwd": str(agent_root)}
+        for name, server in config.get("mcpServers", {}).items()
+    }
+    return {"mcpServers": servers}
 
 
 class MCPManager:

@@ -1,9 +1,9 @@
 {
   "mcpServers": {
     "cloud_billing": {
-      "command": "E:/AiProject/deep_research/venv/Scripts/python",
+      "command": "python",
       "args": ["-m", "mcp_servers.cloud_platform_server"],
-      "cwd": "E:/AiProject/deep_research/cloud_agent/agent",
+      "cwd": ".",
       "transport": "stdio"
     }
   }
