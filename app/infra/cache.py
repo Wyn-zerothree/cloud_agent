@@ -6,7 +6,9 @@ from app_config.settings import settings
 
 COLLECTION_NAME = "qa_semantic_cache"
 EMBEDDING_DIM = 1536
-L1_SEMANTIC_DISTANCE_THRESHOLD = 0.08
+# Milvus 的 COSINE 度量返回的是相似度而非距离：完全相同为 1.0，完全无关接近 0。
+# 实测：同一问句 1.0，同义改写 0.87，同主题不同问题 0.47，无关问题 0.07。
+L1_SEMANTIC_SIMILARITY_THRESHOLD = 0.85
 
 
 class SemanticCache:
@@ -123,15 +125,15 @@ class SemanticCache:
             hit = results[0][0] if results[0] else None
             if not hit:
                 return None
-            distance = float(hit.get("distance", 1.0))
-            if distance > L1_SEMANTIC_DISTANCE_THRESHOLD:
+            similarity = float(hit.get("distance", 0.0))
+            if similarity < L1_SEMANTIC_SIMILARITY_THRESHOLD:
                 return None
             entity = hit.get("entity", {})
             return {
                 "answer": entity.get("answer", ""),
                 "matched_question": entity.get("question", ""),
                 "level": "L1_SEMANTIC",
-                "distance": distance,
+                "distance": 1.0 - similarity,
             }
         except Exception as exc:
             print(f"SemanticCache get_cache failed: {exc}")

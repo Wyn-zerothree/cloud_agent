@@ -137,7 +137,7 @@ MCP 侧通过 `MultiServerMCPClient` 拉起子进程并**动态发现工具**，
 `app/infra/cache.py` 实现两级命中：
 
 1. **精确匹配**：归一化后的问句直接查 `question_norm` 字段
-2. **语义匹配**：向量检索 + 距离阈值，命中近似问句
+2. **语义匹配**：向量检索 + 相似度阈值（COSINE，阈值 0.85），命中近似问句
 
 并按 `scope` 分域（`public` 公共知识 / `user` 用户私有），避免跨用户串数据。
 
@@ -200,6 +200,8 @@ python agent/test/milvus_rag.py --query "退款规则"  # 不带 --ingest 时只
 python app/preload_cache.py                   # 预热 L1 语义缓存
 ```
 
+**Neo4j 需要 APOC 插件**：`graph_tool` 的 schema 反射依赖 `apoc.meta.data()`。社区版镜像不自带，需把对应版本的 `apoc-<version>-all.jar` 放进容器 `/plugins` 目录后重启。未安装时图谱查询会自动退化为关键词检索，功能可用但精度下降。
+
 ---
 
 ## 四、目录结构
@@ -236,7 +238,6 @@ mock_data/                      # RAG 用的产品/账单/工单示例文档
 ## 五、已知限制
 
 - **L1 语义缓存目前只读不写**。`set_cache()` 仅在 `app/preload_cache.py` 预热时被调用，运行时链路上没有写回，因此缓存库中只有预置的少数问答，实际命中率很低。
-- **语义缓存的阈值与度量可能不匹配**。`infra/cache.py` 中阈值常量为 `0.08`，而 Milvus 索引使用 `COSINE` 度量（返回的是相似度，越大越相似）。语义命中路径的实际生效范围待验证。
 - **`agent/test/` 不是单元测试**。其中 `build_kg.py`、`milvus_rag.py` 等是一次性初始化脚本，目录命名有误导性；项目没有自动化测试。
-- **强依赖 4 个外部服务**。Redis / Milvus / Neo4j / MySQL 任一缺失都会导致对应能力不可用，且没有降级路径。
+- **强依赖 4 个外部服务**。Redis / Milvus / Neo4j / MySQL 任一缺失都会导致对应能力不可用。知识图谱工具有关键词降级路径（不依赖 APOC），其余能力无降级。
 - **业务数据为示例数据**。`mock_data/` 与 `agent/database/init_mock_data.sql` 为演示用构造数据，非真实业务。

@@ -14,6 +14,19 @@ load_dotenv(dotenv_path)
 # 全局单例，避免每次调用工具时重复连接数据库
 _graph_chain_instance = None
 _graph_instance = None
+_driver_instance = None
+
+
+def _get_driver():
+    """裸 neo4j driver。仅用于降级路径——不触碰 APOC，因此图谱缺插件时仍可用。"""
+    global _driver_instance
+    if _driver_instance is None:
+        from neo4j import GraphDatabase
+        _driver_instance = GraphDatabase.driver(
+            os.getenv("NEO4J_URI", "bolt://YOUR_NEO4J_HOST:7687"),
+            auth=(os.getenv("NEO4J_USER", "neo4j"), os.getenv("NEO4J_PASSWORD", "")),
+        )
+    return _driver_instance
 
 def _get_graph_chain():
     """获取 GraphCypherQAChain 单例"""
@@ -79,57 +92,51 @@ The question is:
 def _extract_keywords(query: str) -> list[str]:
     lower_query = query.lower()
     tokens = re.findall(r"[a-z0-9._-]+", lower_query)
-    cn_tokens = re.findall(r"[\u4e00-\u9fff]{2,}", query)
+    # \u4e2d\u6587\u6ca1\u6709\u8bcd\u8fb9\u754c\uff0c\u6574\u6bb5\u62ff\u53bb\u505a CONTAINS \u6c38\u8fdc\u5339\u914d\u4e0d\u4e0a\uff0c\u56e0\u6b64\u5207\u6210\u4e8c\u5143\u7ec4
+    cn_runs = re.findall(r"[\u4e00-\u9fff]+", query)
+    cn_tokens = []
+    for run in cn_runs:
+        if len(run) <= 4:
+            cn_tokens.append(run)
+        else:
+            cn_tokens.extend(run[i:i + 2] for i in range(len(run) - 1))
     keywords = []
     for token in tokens + cn_tokens:
         if len(token.strip()) >= 2 and token not in keywords:
             keywords.append(token.strip())
     if not keywords:
         keywords.append(lower_query[:20] if lower_query else "ecs")
-    return keywords[:8]
+    return keywords[:12]
 
 def _fallback_graph_keyword_search(query: str) -> str:
-    global _graph_instance
-    if _graph_instance is None:
-        _get_graph_chain()
-    
-    graph = _graph_instance
-    if graph is None:
-        return "图谱关键词检索不可用，请稍后重试。"
-
     keywords = _extract_keywords(query)
-    
-    # Neo4j 无法在 ANY/WHERE 中动态解包 $keywords 列表用于 CONTAINS 匹配，
-    # 因此这里我们采用在 Python 中拼接 OR 语句的简单模式
-    
-    where_clauses = []
-    for k in keywords:
-        where_clauses.append(f"toLower(coalesce(n.id, '')) CONTAINS '{k}' OR toLower(coalesce(n.name, '')) CONTAINS '{k}' OR toLower(coalesce(n.description, '')) CONTAINS '{k}'")
-    node_where = " OR ".join(where_clauses)
-    
-    node_cypher = f"""
+
+    node_cypher = """
     MATCH (n)
-    WHERE {node_where}
+    WHERE ANY(k IN $keywords WHERE
+        toLower(coalesce(n.id, '')) CONTAINS k
+        OR toLower(coalesce(n.name, '')) CONTAINS k
+        OR toLower(coalesce(n.description, '')) CONTAINS k)
     RETURN labels(n) AS labels, coalesce(n.id, n.name, '') AS node_key, properties(n) AS props
     LIMIT 8
     """
-    
-    rel_where_clauses = []
-    for k in keywords:
-        rel_where_clauses.append(f"toLower(coalesce(a.id, '')) CONTAINS '{k}' OR toLower(coalesce(a.name, '')) CONTAINS '{k}' OR toLower(coalesce(b.id, '')) CONTAINS '{k}' OR toLower(coalesce(b.name, '')) CONTAINS '{k}'")
-    rel_where = " OR ".join(rel_where_clauses)
 
-    rel_cypher = f"""
+    rel_cypher = """
     MATCH (a)-[r]->(b)
-    WHERE {rel_where}
+    WHERE ANY(k IN $keywords WHERE
+        toLower(coalesce(a.id, '')) CONTAINS k
+        OR toLower(coalesce(a.name, '')) CONTAINS k
+        OR toLower(coalesce(b.id, '')) CONTAINS k
+        OR toLower(coalesce(b.name, '')) CONTAINS k)
     RETURN labels(a) AS from_labels, coalesce(a.id, a.name, '') AS from_node,
            type(r) AS rel, labels(b) AS to_labels, coalesce(b.id, b.name, '') AS to_node
     LIMIT 8
     """
 
     try:
-        nodes = graph.query(node_cypher)
-        relations = graph.query(rel_cypher)
+        with _get_driver().session() as session:
+            nodes = [r.data() for r in session.run(node_cypher, keywords=keywords)]
+            relations = [r.data() for r in session.run(rel_cypher, keywords=keywords)]
     except Exception as exc:
         return f"图谱关键词检索失败: {str(exc)}"
 
