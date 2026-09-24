@@ -45,8 +45,18 @@ lines: list[str] = []
 
 
 def emit(text: str = "") -> None:
+    """打到屏幕，并写进落盘的结果文件。"""
     print(text)
     lines.append(text)
+
+
+def say(text: str = "") -> None:
+    """只打屏幕，不落盘。
+
+    缓存内容的 dump 只用来挑基准条目和人工核对，属于运行期状态，
+    不进结果文件——它会把当时缓存里的碎片条目和降级答案一并固化下来。
+    """
+    print(text)
 
 
 async def dump() -> list[dict]:
@@ -60,13 +70,13 @@ async def dump() -> list[dict]:
         output_fields=["question", "question_norm", "scope", "user_id", "answer"],
         limit=100,
     )
-    emit(f"qa_semantic_cache 共 {len(rows)} 条：")
+    say(f"qa_semantic_cache 共 {len(rows)} 条（仅屏幕，不落盘）：")
     for r in rows:
-        emit(
+        say(
             f"  [scope={r.get('scope')} user={r.get('user_id') or '-'}] "
             f"{r.get('question_norm')!r}"
         )
-        emit(f"      answer: {str(r.get('answer'))[:80]}...")
+        say(f"      answer: {str(r.get('answer'))[:80]}...")
     return rows
 
 
