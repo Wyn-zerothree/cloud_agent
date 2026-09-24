@@ -1,0 +1,15 @@
+short_term.available = True
+long_term.available  = True
+写入 Redis 消息数 = 4
+调用 background_extract ...
+background_extract 返回 = ['城市: 北京', '偏好: 回答简洁', '不喜欢: 长篇大论、参数表', '习惯: 使用图形化界面操作（不用命令行）', '偏好: 云服务器购买流程简单（点几下就能完成）', '预算: 偏低']
+会话后 Redis 消息数 = 4 (应仍为 4，未被清)
+load_preferences 回读 3 条 = ['偏好: 回答简洁', '不喜欢: 长篇大论、参数表', '习惯: 使用图形化界面操作（不用命令行）']
+Milvus 该 user 行数 = 6
+   {'user_id': 'probe_lt_verify', 'content': '城市: 北京', 'memory_type': 'preference', 'id': 469296296462380841}
+   {'user_id': 'probe_lt_verify', 'content': '偏好: 回答简洁', 'memory_type': 'preference', 'id': 469296296462380843}
+   {'user_id': 'probe_lt_verify', 'content': '不喜欢: 长篇大论、参数表', 'memory_type': 'preference', 'id': 469296296462380845}
+   {'user_id': 'probe_lt_verify', 'content': '习惯: 使用图形化界面操作（不用命令行）', 'memory_type': 'preference', 'id': 469296296462380847}
+   {'user_id': 'probe_lt_verify', 'content': '偏好: 云服务器购买流程简单（点几下就能完成）', 'memory_type': 'preference', 'id': 469296296462380849}
+   {'user_id': 'probe_lt_verify', 'content': '预算: 偏低', 'memory_type': 'preference', 'id': 469296296462380851}
+清理后该 user 行数 = 6

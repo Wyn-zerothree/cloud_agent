@@ -1,0 +1,13 @@
+collections: ['qa_semantic_cache', 'cloud_product_docs', 'mult_agent_knowledge', 'mult_agent_knowledge_c300', 'mult_agent_knowledge_c500', 'mult_agent_knowledge_c800', 'long_term_memory']
+- qa_semantic_cache: num_entities=12 desc=''
+- cloud_product_docs: num_entities=41 desc=''
+- mult_agent_knowledge: num_entities=688 desc=''
+- mult_agent_knowledge_c300: num_entities=1253 desc=''
+- mult_agent_knowledge_c500: num_entities=688 desc=''
+- mult_agent_knowledge_c800: num_entities=411 desc=''
+- long_term_memory: num_entities=0 desc=''
+    field id type=5 params={}
+    field user_id type=21 params={'max_length': 128}
+    field content type=21 params={'max_length': 2048}
+    field memory_type type=21 params={'max_length': 64}
+    field embedding type=101 params={'dim': 1536}

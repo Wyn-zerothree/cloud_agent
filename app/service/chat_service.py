@@ -15,14 +15,17 @@ from infra.cache import semantic_cache
 # Global variables for graph and memory
 graph = None
 memory = None
+memory_llm = None
+# (user_id, session_id) -> 本会话已处理轮数，用于定期触发长期偏好抽取
+_session_turns: dict[tuple[str, str], int] = {}
 
 async def init_agent_system():
-    global graph, memory
+    global graph, memory, memory_llm
     if graph is None:
         print("🚀 初始化 Multi-Agent 图编排...")
         graph_manager = AgentGraphManager()
         graph = graph_manager.build_graph()
-        
+
         print("🧠 初始化 Memory 系统...")
         from config import get_settings
         settings = get_settings()
@@ -36,6 +39,9 @@ async def init_agent_system():
         )
         await memory.initialize()
         await semantic_cache.initialize()
+
+        from langchain_openai import ChatOpenAI
+        memory_llm = ChatOpenAI(**settings.get_model_config(), temperature=0)
         print("✅ Agent 系统初始化完成！")
 
 # 写入准入：只有纯产品咨询的回答才进公共缓存。账单/推广/推荐的回答里含用户私有数据
@@ -113,7 +119,20 @@ async def stream_chat(query: str, user_id: str, session_id: str):
             {"role": "assistant", "content": response_text},
         ]
         await memory.save_conversation(user_id, session_id, turn)
-        
+
+        # HTTP 流式接口没有「会话结束」事件可挂，用定期提取代替 finalize_session：
+        # 每 5 轮抽一次，不阻塞响应，也不清 Redis。不能拿 len(history) 当计数——
+        # ShortTermMemory 会在超过 10 条时把历史裁回 6 条，长度会长期停在 6。
+        _session_turns[(user_id, session_id)] = _session_turns.get((user_id, session_id), 0) + 1
+        if (
+            memory.long_term.available
+            and memory_llm is not None
+            and _session_turns[(user_id, session_id)] % 5 == 0
+        ):
+            asyncio.create_task(
+                memory.background_extract(user_id, session_id, memory_llm)
+            )
+
     # 流式返回大模型结果
     chunk_size = 5
     for i in range(0, len(response_text), chunk_size):

@@ -33,6 +33,8 @@ for _stream in (sys.stdin, sys.stdout, sys.stderr):
     if hasattr(_stream, 'reconfigure'):
         _stream.reconfigure(encoding='utf-8', errors='replace')
 
+from langchain_openai import ChatOpenAI
+
 from config import get_settings
 from core.memory import MemoryManager
 from core.workflow.graph_manager import AgentGraphManager
@@ -94,8 +96,11 @@ async def run_interactive_mode(
     print(f"  [MEM] Long-term  (Milvus): {'✅ connected' if lt_ok else '❌ not available'}")
     print()
 
+    # 定期提取与结束会话时提取偏好都要一个 LLM，配置与各 Agent 同源
+    memory_llm = ChatOpenAI(**get_settings().get_model_config(), temperature=0)
+
     graph = graph_manager.build_graph()
-    
+
     # 初始化状态
     state: AgentState = {
         "messages": [],
@@ -149,11 +154,13 @@ async def run_interactive_mode(
                 ]
                 await memory.save_conversation(user_id, session_id, turn)
             
-            # 4. 定期触发长期内存提取
+            # 4. 定期触发长期内存提取（不清 Redis，会话继续）
             turn_count += 1
             if turn_count % 5 == 0:
                 print("🔄 [Background] Triggering long-term memory extraction...")
-                asyncio.create_task(memory.extract_and_save_preferences(user_id, session_id))
+                asyncio.create_task(
+                    memory.background_extract(user_id, session_id, memory_llm)
+                )
 
     except KeyboardInterrupt:
         print("\n\n👋 Goodbye!")
@@ -163,7 +170,7 @@ async def run_interactive_mode(
     finally:
         print("\n" + "-" * 60)
         print("💾 Saving session preferences to long-term memory...")
-        await memory.extract_and_save_preferences(user_id, session_id)
+        await memory.finalize_session(user_id, session_id, memory_llm)
         print("✅ Session finalized.")
         print("-" * 60 + "\n")
 
