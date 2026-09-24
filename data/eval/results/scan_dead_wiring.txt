@@ -1,0 +1,30 @@
+========================================================================
+A. 定义了但全仓零调用点（既无 x.name() 也无 name()）
+========================================================================
+  _ensure_tools                      def@ ['agent/agents/billing_agent.py:56', 'agent/agents/finops_agent.py:31', 'agent/agents/promotion_agent.py:31']
+  analyze_instance_usage             def@ ['agent/mcp_servers/cloud_platform_server.py:322']
+  append_message                     def@ ['agent/core/memory/short_term.py:123']
+  chat_endpoint                      def@ ['app/router/chat.py:9']
+  clear_database                     def@ ['agent/core/graph/client.py:118']
+  generate_ai_poster                 def@ ['agent/mcp_servers/cloud_platform_server.py:185']
+  get_promotable_products            def@ ['agent/mcp_servers/cloud_platform_server.py:72']
+  get_promotion_materials            def@ ['agent/mcp_servers/cloud_platform_server.py:124']
+  get_recent_messages                def@ ['agent/core/memory/memory_manager.py:140']
+  get_server_names                   def@ ['agent/core/mcp/mcp_manager.py:146']
+  get_stats                          def@ ['agent/core/graph/client.py:124']
+  get_tool_names                     def@ ['agent/core/mcp/mcp_manager.py:133']
+  ingest_all                         def@ ['agent/core/graph/ingestor.py:393']
+  parse_file                         def@ ['agent/core/graph/parser.py:189']
+  query_user_instances               def@ ['agent/mcp_servers/cloud_platform_server.py:291']
+  query_user_orders                  def@ ['agent/mcp_servers/cloud_platform_server.py:255']
+  search_product_catalog             def@ ['agent/mcp_servers/cloud_platform_server.py:94']
+  validate_api_key                   def@ ['agent/config/settings.py:58']
+  —— 共 18 个
+
+========================================================================
+B. recv.name() 但全仓无 name 定义，且 recv 不是导入的模块
+========================================================================
+  res.json                                     @ agent/mcp_servers/cloud_platform_server.py:224
+  graph.refresh_schema                         @ agent/tools/graph_tool.py:46
+
+统计: 定义 85 / A类 18 / B类 2
