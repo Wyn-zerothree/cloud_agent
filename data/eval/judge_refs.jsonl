@@ -1,0 +1,30 @@
+{"id":"s01","ref":"可用区 cn-beijing-k（可用区K）支持的规格族：c8a（计算型）、g8a（通用型）、gn7i（GPU计算型）"}
+{"id":"s02","ref":"cn-beijing-g（可用区G）不支持 GPU 实例"}
+{"id":"s03","ref":"cn-hangzhou-h（可用区H）支持裸金属实例 ebm、通用型 g7、计算型 c7"}
+{"id":"s04","ref":"cn-beijing-l（可用区L）支持抢占式实例优先调度"}
+{"id":"s05","ref":"单实例 10 Gbps"}
+{"id":"s06","ref":"cn-beijing-g、cn-beijing-k、cn-beijing-l 三个可用区"}
+{"id":"s07","ref":"3 个弹性网卡（ecs.g8a.xlarge 最多绑定 3 个 ENI）。注意图谱里存的是裸值 3。"}
+{"id":"s08","ref":"1200 万 PPS。注意图谱里存的是 max_pps_millions=12，即 12 百万 = 1200 万。"}
+{"id":"s09","ref":"NVIDIA A10，24 GiB 显存"}
+{"id":"s10","ref":"2 vCPU，4 GiB 内存"}
+{"id":"s11","ref":"ecs.c7.8xlarge"}
+{"id":"s12","ref":"ecs.c7.8xlarge"}
+{"id":"s13","ref":"ecs.g8a.xlarge 与 ecs.g8a.4xlarge"}
+{"id":"s14","ref":"NVIDIA A10 / A100 Tensor Core GPU"}
+{"id":"s15","ref":"ecs.c7.8xlarge"}
+{"id":"s16","ref":"ESSD PL2 仅支持挂载于 g8a、gn7i 及 16 vCPU 以上规格的 c7 实例"}
+{"id":"s17","ref":"本地 NVMe SSD 不支持 g8a 和 c7"}
+{"id":"s18","ref":"10000 IOPS"}
+{"id":"s19","ref":"ESSD PL2 云盘"}
+{"id":"s20","ref":"32768 GiB"}
+{"id":"s21","ref":"挂载本地盘的 i4 系列实例，以及带本地盘的 GPU 实例 gn7i"}
+{"id":"s22","ref":"包年包月（Subscription）"}
+{"id":"s23","ref":"1 次（每个账号每个自然年仅 1 次）"}
+{"id":"s24","ref":"15%（15% 的退订手续费）"}
+{"id":"s25","ref":"15 天"}
+{"id":"s26","ref":"5.5 折（买三年）"}
+{"id":"s27","ref":"入网流量免费（只收出网流量费用）"}
+{"id":"s28","ref":"5 个安全组"}
+{"id":"s29","ref":"跨 VPC 默认不通，需要配置云企业网 CEN 打通"}
+{"id":"s30","ref":"不能，EIP 严禁跨地域绑定"}

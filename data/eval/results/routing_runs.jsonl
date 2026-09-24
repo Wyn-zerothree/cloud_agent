@@ -1,0 +1,50 @@
+{"id": "r01", "q": "什么是专有网络VPC？", "kind": "scored", "gold": "product_agent", "decision": "product_agent", "correct": true, "note": "", "error": null, "latency_s": 0.49}
+{"id": "r02", "q": "云服务器ECS不同可用区之间的网络是怎么隔离的？", "kind": "scored", "gold": "product_agent", "decision": "product_agent", "correct": true, "note": "", "error": null, "latency_s": 0.47}
+{"id": "r03", "q": "8核16G的机器跑Java后端加MySQL数据库够不够用？", "kind": "scored", "gold": "product_agent", "decision": "product_agent", "correct": true, "note": "", "error": null, "latency_s": 0.56}
+{"id": "r04", "q": "ESSD PL2 云盘和 PL1 云盘有什么区别？", "kind": "scored", "gold": "product_agent", "decision": "product_agent", "correct": true, "note": "", "error": null, "latency_s": 0.53}
+{"id": "r05", "q": "安全组默认的入方向和出方向规则分别是什么？", "kind": "scored", "gold": "product_agent", "decision": "product_agent", "correct": true, "note": "", "error": null, "latency_s": 0.48}
+{"id": "r06", "q": "怎么给一台ECS实例挂载数据盘？", "kind": "scored", "gold": "product_agent", "decision": "product_agent", "correct": true, "note": "", "error": null, "latency_s": 0.36}
+{"id": "r07", "q": "弹性网卡ENI是什么？一块网卡最多能加入几个安全组？", "kind": "scored", "gold": "product_agent", "decision": "product_agent", "correct": true, "note": "", "error": null, "latency_s": 0.36}
+{"id": "r08", "q": "什么叫神龙架构？", "kind": "scored", "gold": "product_agent", "decision": "product_agent", "correct": true, "note": "", "error": null, "latency_s": 0.34}
+{"id": "r09", "q": "我最近买了哪些机器？", "kind": "scored", "gold": "billing_agent", "decision": "billing_agent", "correct": true, "note": "", "error": null, "latency_s": 0.48}
+{"id": "r10", "q": "帮我查一下我名下正在运行的云资源实例", "kind": "scored", "gold": "billing_agent", "decision": "billing_agent", "correct": true, "note": "", "error": null, "latency_s": 0.33}
+{"id": "r11", "q": "我这个月的账单明细是多少？", "kind": "scored", "gold": "billing_agent", "decision": "billing_agent", "correct": true, "note": "", "error": null, "latency_s": 0.33}
+{"id": "r12", "q": "我的订单记录里有哪些还没支付的？", "kind": "scored", "gold": "billing_agent", "decision": "billing_agent", "correct": true, "note": "", "error": null, "latency_s": 0.32}
+{"id": "r13", "q": "我有哪些ECS实例目前是欠费停机的？", "kind": "scored", "gold": "billing_agent", "decision": "billing_agent", "correct": true, "note": "", "error": null, "latency_s": 0.34}
+{"id": "r14", "q": "查一下我账户里所有的云资源", "kind": "scored", "gold": "billing_agent", "decision": "billing_agent", "correct": true, "note": "", "error": null, "latency_s": 0.34}
+{"id": "r15", "q": "我买的那台RDS实例现在是什么状态？", "kind": "scored", "gold": "billing_agent", "decision": "billing_agent", "correct": true, "note": "", "error": null, "latency_s": 0.37}
+{"id": "r16", "q": "我购买的实例什么时候到期？", "kind": "scored", "gold": "billing_agent", "decision": "billing_agent", "correct": true, "note": "", "error": null, "latency_s": 0.33}
+{"id": "r17", "q": "帮我生成一张ECS云服务器的推广海报", "kind": "scored", "gold": "promotion_agent", "decision": "promotion_agent", "correct": true, "note": "", "error": null, "latency_s": 0.39}
+{"id": "r18", "q": "我想推广云数据库产品，有返佣活动吗？", "kind": "scored", "gold": "promotion_agent", "decision": "promotion_agent", "correct": true, "note": "", "error": null, "latency_s": 0.38}
+{"id": "r19", "q": "给我一个云服务器的活动推广链接", "kind": "scored", "gold": "promotion_agent", "decision": "promotion_agent", "correct": true, "note": "", "error": null, "latency_s": 0.41}
+{"id": "r20", "q": "怎么把这个产品分享给别人？", "kind": "scored", "gold": "promotion_agent", "decision": "promotion_agent", "correct": true, "note": "", "error": null, "latency_s": 0.71}
+{"id": "r21", "q": "推广返佣的佣金比例是多少？", "kind": "scored", "gold": "promotion_agent", "decision": "promotion_agent", "correct": true, "note": "", "error": null, "latency_s": 0.32}
+{"id": "r22", "q": "帮我做一张带优惠信息的宣传图", "kind": "scored", "gold": "promotion_agent", "decision": "promotion_agent", "correct": true, "note": "", "error": null, "latency_s": 0.41}
+{"id": "r23", "q": "我想参加分销，怎么获取推广素材？", "kind": "scored", "gold": "promotion_agent", "decision": "promotion_agent", "correct": true, "note": "", "error": null, "latency_s": 0.34}
+{"id": "r24", "q": "有邀请好友的活动链接吗？", "kind": "scored", "gold": "promotion_agent", "decision": "promotion_agent", "correct": true, "note": "", "error": null, "latency_s": 0.35}
+{"id": "r25", "q": "我要部署一个高并发的电商系统，推荐几款合适的实例", "kind": "scored", "gold": "recommendation_agent", "decision": "recommendation_agent", "correct": true, "note": "", "error": null, "latency_s": 0.43}
+{"id": "r26", "q": "预算每月500元，推荐一款适合我的云服务器", "kind": "scored", "gold": "recommendation_agent", "decision": "recommendation_agent", "correct": true, "note": "", "error": null, "latency_s": 0.34}
+{"id": "r27", "q": "推荐一款适合跑深度学习推理的GPU实例", "kind": "scored", "gold": "recommendation_agent", "decision": "recommendation_agent", "correct": true, "note": "", "error": null, "latency_s": 0.41}
+{"id": "r28", "q": "推荐几款性价比高的通用型实例给我选", "kind": "scored", "gold": "recommendation_agent", "decision": "recommendation_agent", "correct": true, "note": "", "error": null, "latency_s": 0.31}
+{"id": "r29", "q": "我的业务是短视频转码，买哪款实例合适？", "kind": "scored", "gold": "recommendation_agent", "decision": "recommendation_agent", "correct": true, "note": "", "error": null, "latency_s": 0.38}
+{"id": "r30", "q": "我需要跑内存密集型的Redis，推荐什么型号的实例？", "kind": "scored", "gold": "recommendation_agent", "decision": "recommendation_agent", "correct": true, "note": "", "error": null, "latency_s": 0.33}
+{"id": "r31", "q": "帮我推荐一款适合中小型数据库的云数据库规格", "kind": "scored", "gold": "recommendation_agent", "decision": "recommendation_agent", "correct": true, "note": "", "error": null, "latency_s": 0.35}
+{"id": "r32", "q": "我有个游戏服要开，推荐个型号给我", "kind": "scored", "gold": "recommendation_agent", "decision": "recommendation_agent", "correct": true, "note": "", "error": null, "latency_s": 0.38}
+{"id": "r33", "q": "我的服务器太贵了，帮我降本增效", "kind": "scored", "gold": "finops_agent_trigger", "decision": "finops_agent_trigger", "correct": true, "note": "", "error": null, "latency_s": 0.48}
+{"id": "r34", "q": "帮我看看有哪些资源闲置可以省钱", "kind": "scored", "gold": "finops_agent_trigger", "decision": "finops_agent_trigger", "correct": true, "note": "", "error": null, "latency_s": 0.39}
+{"id": "r35", "q": "我的云成本太高了，怎么优化？", "kind": "scored", "gold": "finops_agent_trigger", "decision": "finops_agent_trigger", "correct": true, "note": "", "error": null, "latency_s": 0.36}
+{"id": "r36", "q": "帮我做一次成本优化分析", "kind": "scored", "gold": "finops_agent_trigger", "decision": "finops_agent_trigger", "correct": true, "note": "", "error": null, "latency_s": 0.42}
+{"id": "r37", "q": "这个月开销太大了，怎么降低费用？", "kind": "scored", "gold": "finops_agent_trigger", "decision": "finops_agent_trigger", "correct": true, "note": "", "error": null, "latency_s": 0.4}
+{"id": "r38", "q": "帮我看看有没有闲置的实例可以释放掉", "kind": "scored", "gold": "finops_agent_trigger", "decision": "finops_agent_trigger", "correct": true, "note": "", "error": null, "latency_s": 0.39}
+{"id": "r39", "q": "我的账单太贵了，想优化一下服务器成本", "kind": "scored", "gold": "finops_agent_trigger", "decision": "finops_agent_trigger", "correct": true, "note": "", "error": null, "latency_s": 0.43}
+{"id": "r40", "q": "帮我分析下哪台机器在浪费钱", "kind": "scored", "gold": "finops_agent_trigger", "decision": "finops_agent_trigger", "correct": true, "note": "", "error": null, "latency_s": 0.36}
+{"id": "x01", "q": "你好", "kind": "chitchat", "gold": null, "decision": "product_agent", "correct": null, "note": "系统无闲聊类，兜底 product_agent", "error": null, "latency_s": 0.36}
+{"id": "x02", "q": "谢谢你", "kind": "chitchat", "gold": null, "decision": "product_agent", "correct": null, "note": "系统无闲聊类", "error": null, "latency_s": 0.32}
+{"id": "x03", "q": "今天天气怎么样？", "kind": "chitchat", "gold": null, "decision": "product_agent", "correct": null, "note": "系统无闲聊类", "error": null, "latency_s": 0.32}
+{"id": "x04", "q": "你是谁？", "kind": "chitchat", "gold": null, "decision": "product_agent", "correct": null, "note": "系统无闲聊类", "error": null, "latency_s": 0.28}
+{"id": "x05", "q": "给我讲个笑话", "kind": "chitchat", "gold": null, "decision": "product_agent", "correct": null, "note": "系统无闲聊类", "error": null, "latency_s": 0.42}
+{"id": "x06", "q": "再见", "kind": "chitchat", "gold": null, "decision": "product_agent", "correct": null, "note": "系统无闲聊类", "error": null, "latency_s": 0.33}
+{"id": "b01", "q": "我想买个数据库，帮我看看哪种合适", "kind": "boundary", "gold": null, "decision": "recommendation_agent", "correct": null, "note": "「推荐型号」→recommendation 与「产品选型」→product 规则冲突", "error": null, "latency_s": 0.85}
+{"id": "b02", "q": "ECS 和 RDS 到底有什么区别？帮我推荐一个方案", "kind": "boundary", "gold": null, "decision": "recommendation_agent", "correct": null, "note": "概念对比 + 推荐，规则冲突", "error": null, "latency_s": 0.36}
+{"id": "b03", "q": "我的Java服务用哪个规格比较合适？", "kind": "boundary", "gold": null, "decision": "recommendation_agent", "correct": null, "note": "prompt 同时把「业务场景选规格」归 product、「推荐型号」归 recommendation", "error": null, "latency_s": 0.36}
+{"id": "b04", "q": "我的实例是不是该升级配置了", "kind": "boundary", "gold": null, "decision": "finops_agent_trigger", "correct": null, "note": "资产查询与选型的边界", "error": null, "latency_s": 0.38}
