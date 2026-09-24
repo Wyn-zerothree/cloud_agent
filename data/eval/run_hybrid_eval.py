@@ -136,6 +136,10 @@ def main():
     chain, graph = _chain_with_steps()
 
     records, t0 = [], time.time()
+    out_path = Path(args.output)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    # 增量落盘：网络抖动时进程可能被长挂起或中断，逐条追加保证已完成的部分不丢。
+    sink = open(out_path, "w", encoding="utf-8")
     for i, item in enumerate(items, 1):
         q = item["q"]
         needles = item["must_contain"]
@@ -156,20 +160,18 @@ def main():
             "graph_cypher": cypher, "graph_error": gerr, "vector_error": verr,
         }
         records.append(rec)
+        sink.write(json.dumps(rec, ensure_ascii=False) + "\n")
+        sink.flush()
         flag = "补回" if (g_hit and not v_hit) else ("都中" if (v_hit and g_hit) else
                                                    ("都漏" if not (v_hit or g_hit) else "向量中"))
         print(f"[{i:2d}/{len(items)}] {item['id']} {item['cat']:6s} "
-              f"向量={'✓' if v_hit else '✗'} 图谱={'✓' if g_hit else '✗'} {flag}  | {q}")
+              f"向量={'✓' if v_hit else '✗'} 图谱={'✓' if g_hit else '✗'} {flag}  | {q}",
+              flush=True)
         if gerr:
-            print(f"         图谱错误: {gerr[:100]}")
+            print(f"         图谱错误: {gerr[:100]}", flush=True)
 
     elapsed = time.time() - t0
-
-    out_path = Path(args.output)
-    out_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(out_path, "w", encoding="utf-8") as f:
-        for r in records:
-            f.write(json.dumps(r, ensure_ascii=False) + "\n")
+    sink.close()
 
     n = len(records)
     v_hits = sum(r["vector_hit"] for r in records)

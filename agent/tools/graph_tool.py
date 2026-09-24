@@ -70,10 +70,6 @@ Important Rules:
    正确示例: MATCH (i:InstanceType {{id: "ecs.g8a.4xlarge"}}) RETURN i.vcpu
 3. 注意实体层级: g8a, c7 这种属于 InstanceTypeFamily（规格族）。ecs.g8a.xlarge 这种具体型号才属于 InstanceType（实例规格）。
 4. 查询返回格式: 返回的信息应尽可能详细，如果返回节点，请使用 RETURN node，而不是只返回 ID。
-5. 禁止参数化: 不要把条件值写成 $storageId 之类的参数占位符，必须把字面值直接写进 Cypher，
-   否则执行时会报 ParameterMissing 错误。
-6. 必须以 MATCH 开头: Cypher 要从 MATCH 子句起手，不要直接写裸的关系模式
-   （例如不要写 (:SecurityGroup)-[:HAS_QUOTA]->(:Quota)），否则会报语法错误。
 
 The question is:
 {question}"""

@@ -13,18 +13,18 @@
 {"id": "s13", "cat": "实例规格", "q": "g8a 规格族下面包含哪些具体实例型号？", "vector_hit": true, "vector_raw": "是", "graph_hit": true, "graph_raw": "是"}
 {"id": "s14", "cat": "实例规格", "q": "gn7i 实例搭配的是什么GPU？", "vector_hit": true, "vector_raw": "是", "graph_hit": true, "graph_raw": "是"}
 {"id": "s15", "cat": "实例规格", "q": "哪个实例规格最多支持 15 个弹性网卡？", "vector_hit": true, "vector_raw": "是", "graph_hit": true, "graph_raw": "是"}
-{"id": "s16", "cat": "存储", "q": "ESSD PL2 云盘可以挂载在哪些实例上？", "vector_hit": true, "vector_raw": "是", "graph_hit": false, "graph_raw": "(空)"}
+{"id": "s16", "cat": "存储", "q": "ESSD PL2 云盘可以挂载在哪些实例上？", "vector_hit": true, "vector_raw": "是", "graph_hit": false, "graph_raw": "否"}
 {"id": "s17", "cat": "存储", "q": "本地 NVMe SSD 不支持哪些规格族使用？", "vector_hit": true, "vector_raw": "是", "graph_hit": false, "graph_raw": "否"}
-{"id": "s18", "cat": "存储", "q": "ESSD PL0 云盘的最高 IOPS 是多少？", "vector_hit": true, "vector_raw": "是", "graph_hit": true, "graph_raw": "是"}
-{"id": "s19", "cat": "存储", "q": "哪一类云盘仅支持 16 vCPU 以上的规格？", "vector_hit": true, "vector_raw": "是", "graph_hit": false, "graph_raw": "否"}
-{"id": "s20", "cat": "存储", "q": "单盘容量上限是多少 GiB？", "vector_hit": true, "vector_raw": "是", "graph_hit": true, "graph_raw": "是"}
+{"id": "s18", "cat": "存储", "q": "ESSD PL0 云盘的最高 IOPS 是多少？", "vector_hit": true, "vector_raw": "是", "graph_hit": false, "graph_raw": "否"}
+{"id": "s19", "cat": "存储", "q": "哪一类云盘仅支持 16 vCPU 以上的规格？", "vector_hit": true, "vector_raw": "是", "graph_hit": false, "graph_raw": "(空)"}
+{"id": "s20", "cat": "存储", "q": "单盘容量上限是多少 GiB？", "vector_hit": true, "vector_raw": "是", "graph_hit": false, "graph_raw": "否"}
 {"id": "s21", "cat": "计费退款", "q": "停机不收费功能对哪些实例类型不生效？", "vector_hit": true, "vector_raw": "是", "graph_hit": false, "graph_raw": "否"}
-{"id": "s22", "cat": "计费退款", "q": "抢占式实例绝对不支持转换成什么计费模式？", "vector_hit": true, "vector_raw": "是", "graph_hit": true, "graph_raw": "是"}
+{"id": "s22", "cat": "计费退款", "q": "抢占式实例绝对不支持转换成什么计费模式？", "vector_hit": true, "vector_raw": "是", "graph_hit": false, "graph_raw": "否"}
 {"id": "s23", "cat": "计费退款", "q": "五天无理由退款每个账号每年能享受几次？", "vector_hit": true, "vector_raw": "是", "graph_hit": false, "graph_raw": "否"}
-{"id": "s24", "cat": "计费退款", "q": "非全额退订要收多少比例的手续费？", "vector_hit": true, "vector_raw": "是", "graph_hit": false, "graph_raw": "否"}
+{"id": "s24", "cat": "计费退款", "q": "非全额退订要收多少比例的手续费？", "vector_hit": true, "vector_raw": "是", "graph_hit": true, "graph_raw": "是"}
 {"id": "s25", "cat": "计费退款", "q": "按量付费实例欠费停机后数据保留多长时间？", "vector_hit": true, "vector_raw": "是", "graph_hit": false, "graph_raw": "否"}
-{"id": "s26", "cat": "计费退款", "q": "包年包月实例一次买三年的折扣是多少？", "vector_hit": true, "vector_raw": "是", "graph_hit": true, "graph_raw": "是"}
+{"id": "s26", "cat": "计费退款", "q": "包年包月实例一次买三年的折扣是多少？", "vector_hit": true, "vector_raw": "是", "graph_hit": false, "graph_raw": "否"}
 {"id": "s27", "cat": "计费退款", "q": "按使用流量计费时，入网流量怎么收费？", "vector_hit": true, "vector_raw": "是", "graph_hit": false, "graph_raw": "否"}
-{"id": "s28", "cat": "网络安全", "q": "一块弹性网卡最多能加入几个安全组？", "vector_hit": true, "vector_raw": "是", "graph_hit": false, "graph_raw": "(空)"}
+{"id": "s28", "cat": "网络安全", "q": "一块弹性网卡最多能加入几个安全组？", "vector_hit": true, "vector_raw": "是", "graph_hit": true, "graph_raw": "是"}
 {"id": "s29", "cat": "网络安全", "q": "跨VPC默认互通吗？需要配置什么才能打通？", "vector_hit": true, "vector_raw": "是", "graph_hit": false, "graph_raw": "(空)"}
-{"id": "s30", "cat": "网络安全", "q": "EIP 能否跨地域绑定到其他地域的实例上？", "vector_hit": true, "vector_raw": "是", "graph_hit": true, "graph_raw": "是"}
+{"id": "s30", "cat": "网络安全", "q": "EIP 能否跨地域绑定到其他地域的实例上？", "vector_hit": true, "vector_raw": "是", "graph_hit": false, "graph_raw": "否"}
