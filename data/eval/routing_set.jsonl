@@ -1,0 +1,56 @@
+{"id":"r01","gold":"product_agent","q":"什么是专有网络VPC？","kind":"scored"}
+{"id":"r02","gold":"product_agent","q":"云服务器ECS不同可用区之间的网络是怎么隔离的？","kind":"scored"}
+{"id":"r03","gold":"product_agent","q":"8核16G的机器跑Java后端加MySQL数据库够不够用？","kind":"scored"}
+{"id":"r04","gold":"product_agent","q":"ESSD PL2 云盘和 PL1 云盘有什么区别？","kind":"scored"}
+{"id":"r05","gold":"product_agent","q":"安全组默认的入方向和出方向规则分别是什么？","kind":"scored"}
+{"id":"r06","gold":"product_agent","q":"怎么给一台ECS实例挂载数据盘？","kind":"scored"}
+{"id":"r07","gold":"product_agent","q":"弹性网卡ENI是什么？一块网卡最多能加入几个安全组？","kind":"scored"}
+{"id":"r08","gold":"product_agent","q":"什么叫神龙架构？","kind":"scored"}
+
+{"id":"r09","gold":"billing_agent","q":"我最近买了哪些机器？","kind":"scored"}
+{"id":"r10","gold":"billing_agent","q":"帮我查一下我名下正在运行的云资源实例","kind":"scored"}
+{"id":"r11","gold":"billing_agent","q":"我这个月的账单明细是多少？","kind":"scored"}
+{"id":"r12","gold":"billing_agent","q":"我的订单记录里有哪些还没支付的？","kind":"scored"}
+{"id":"r13","gold":"billing_agent","q":"我有哪些ECS实例目前是欠费停机的？","kind":"scored"}
+{"id":"r14","gold":"billing_agent","q":"查一下我账户里所有的云资源","kind":"scored"}
+{"id":"r15","gold":"billing_agent","q":"我买的那台RDS实例现在是什么状态？","kind":"scored"}
+{"id":"r16","gold":"billing_agent","q":"我购买的实例什么时候到期？","kind":"scored"}
+
+{"id":"r17","gold":"promotion_agent","q":"帮我生成一张ECS云服务器的推广海报","kind":"scored"}
+{"id":"r18","gold":"promotion_agent","q":"我想推广云数据库产品，有返佣活动吗？","kind":"scored"}
+{"id":"r19","gold":"promotion_agent","q":"给我一个云服务器的活动推广链接","kind":"scored"}
+{"id":"r20","gold":"promotion_agent","q":"怎么把这个产品分享给别人？","kind":"scored"}
+{"id":"r21","gold":"promotion_agent","q":"推广返佣的佣金比例是多少？","kind":"scored"}
+{"id":"r22","gold":"promotion_agent","q":"帮我做一张带优惠信息的宣传图","kind":"scored"}
+{"id":"r23","gold":"promotion_agent","q":"我想参加分销，怎么获取推广素材？","kind":"scored"}
+{"id":"r24","gold":"promotion_agent","q":"有邀请好友的活动链接吗？","kind":"scored"}
+
+{"id":"r25","gold":"recommendation_agent","q":"我要部署一个高并发的电商系统，推荐几款合适的实例","kind":"scored"}
+{"id":"r26","gold":"recommendation_agent","q":"预算每月500元，推荐一款适合我的云服务器","kind":"scored"}
+{"id":"r27","gold":"recommendation_agent","q":"推荐一款适合跑深度学习推理的GPU实例","kind":"scored"}
+{"id":"r28","gold":"recommendation_agent","q":"推荐几款性价比高的通用型实例给我选","kind":"scored"}
+{"id":"r29","gold":"recommendation_agent","q":"我的业务是短视频转码，买哪款实例合适？","kind":"scored"}
+{"id":"r30","gold":"recommendation_agent","q":"我需要跑内存密集型的Redis，推荐什么型号的实例？","kind":"scored"}
+{"id":"r31","gold":"recommendation_agent","q":"帮我推荐一款适合中小型数据库的云数据库规格","kind":"scored"}
+{"id":"r32","gold":"recommendation_agent","q":"我有个游戏服要开，推荐个型号给我","kind":"scored"}
+
+{"id":"r33","gold":"finops_agent_trigger","q":"我的服务器太贵了，帮我降本增效","kind":"scored"}
+{"id":"r34","gold":"finops_agent_trigger","q":"帮我看看有哪些资源闲置可以省钱","kind":"scored"}
+{"id":"r35","gold":"finops_agent_trigger","q":"我的云成本太高了，怎么优化？","kind":"scored"}
+{"id":"r36","gold":"finops_agent_trigger","q":"帮我做一次成本优化分析","kind":"scored"}
+{"id":"r37","gold":"finops_agent_trigger","q":"这个月开销太大了，怎么降低费用？","kind":"scored"}
+{"id":"r38","gold":"finops_agent_trigger","q":"帮我看看有没有闲置的实例可以释放掉","kind":"scored"}
+{"id":"r39","gold":"finops_agent_trigger","q":"我的账单太贵了，想优化一下服务器成本","kind":"scored"}
+{"id":"r40","gold":"finops_agent_trigger","q":"帮我分析下哪台机器在浪费钱","kind":"scored"}
+
+{"id":"x01","gold":null,"q":"你好","kind":"chitchat","note":"系统无闲聊类，兜底 product_agent"}
+{"id":"x02","gold":null,"q":"谢谢你","kind":"chitchat","note":"系统无闲聊类"}
+{"id":"x03","gold":null,"q":"今天天气怎么样？","kind":"chitchat","note":"系统无闲聊类"}
+{"id":"x04","gold":null,"q":"你是谁？","kind":"chitchat","note":"系统无闲聊类"}
+{"id":"x05","gold":null,"q":"给我讲个笑话","kind":"chitchat","note":"系统无闲聊类"}
+{"id":"x06","gold":null,"q":"再见","kind":"chitchat","note":"系统无闲聊类"}
+
+{"id":"b01","gold":null,"q":"我想买个数据库，帮我看看哪种合适","kind":"boundary","note":"「推荐型号」→recommendation 与「产品选型」→product 规则冲突"}
+{"id":"b02","gold":null,"q":"ECS 和 RDS 到底有什么区别？帮我推荐一个方案","kind":"boundary","note":"概念对比 + 推荐，规则冲突"}
+{"id":"b03","gold":null,"q":"我的Java服务用哪个规格比较合适？","kind":"boundary","note":"prompt 同时把「业务场景选规格」归 product、「推荐型号」归 recommendation"}
+{"id":"b04","gold":null,"q":"我的实例是不是该升级配置了","kind":"boundary","note":"资产查询与选型的边界"}

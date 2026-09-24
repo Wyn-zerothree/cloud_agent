@@ -1,0 +1,34 @@
+{"id":"s01","cat":"地域可用区","q":"华北2北京地域的可用区K都支持哪些实例规格族？","must_contain":["cn-beijing-k"]}
+{"id":"s02","cat":"地域可用区","q":"哪个可用区明确不支持GPU实例？","must_contain":["cn-beijing-g"]}
+{"id":"s03","cat":"地域可用区","q":"杭州地域的可用区支持哪些实例族？","must_contain":["cn-hangzhou-h"]}
+{"id":"s04","cat":"地域可用区","q":"抢占式实例可以在哪个可用区优先调度？","must_contain":["cn-beijing-l"]}
+{"id":"s05","cat":"地域可用区","q":"新加坡地域单实例网络带宽出口的上限是多少？","must_contain":["10Gbps","10 Gbps"]}
+{"id":"s06","cat":"地域可用区","q":"华北2北京下面一共划分了哪几个可用区？","must_contain":["cn-beijing-g","cn-beijing-k","cn-beijing-l"]}
+
+{"id":"s07","cat":"实例规格","q":"ecs.g8a.xlarge 最多能绑定几块弹性网卡？","must_contain":["3 个弹性网卡","3个弹性网卡","绑定 3"]}
+{"id":"s08","cat":"实例规格","q":"ecs.c7.8xlarge 的最大收发包能力是多少？","must_contain":["1200"]}
+{"id":"s09","cat":"实例规格","q":"ecs.gn7i-c8g1.2xlarge 搭载什么GPU、显存多大？","must_contain":["A10"]}
+{"id":"s10","cat":"实例规格","q":"ecs.c7.large 的 vCPU 和内存规格分别是多少？","must_contain":["2 vCPU","4 GiB"]}
+{"id":"s11","cat":"实例规格","q":"哪个实例型号是 32 vCPU？","must_contain":["ecs.c7.8xlarge"]}
+{"id":"s12","cat":"实例规格","q":"哪款实例的最高网络带宽是 40 Gbps？","must_contain":["ecs.c7.8xlarge"]}
+{"id":"s13","cat":"实例规格","q":"g8a 规格族下面包含哪些具体实例型号？","must_contain":["ecs.g8a.xlarge","ecs.g8a.4xlarge"]}
+{"id":"s14","cat":"实例规格","q":"gn7i 实例搭配的是什么GPU？","must_contain":["A10"]}
+{"id":"s15","cat":"实例规格","q":"哪个实例规格最多支持 15 个弹性网卡？","must_contain":["ecs.c7.8xlarge"]}
+
+{"id":"s16","cat":"存储","q":"ESSD PL2 云盘可以挂载在哪些实例上？","must_contain":["PL2"]}
+{"id":"s17","cat":"存储","q":"本地 NVMe SSD 不支持哪些规格族使用？","must_contain":["g8a"]}
+{"id":"s18","cat":"存储","q":"ESSD PL0 云盘的最高 IOPS 是多少？","must_contain":["10000"]}
+{"id":"s19","cat":"存储","q":"哪一类云盘仅支持 16 vCPU 以上的规格？","must_contain":["PL2"]}
+{"id":"s20","cat":"存储","q":"单盘容量上限是多少 GiB？","must_contain":["32768"]}
+
+{"id":"s21","cat":"计费退款","q":"停机不收费功能对哪些实例类型不生效？","must_contain":["i4"]}
+{"id":"s22","cat":"计费退款","q":"抢占式实例绝对不支持转换成什么计费模式？","must_contain":["包年包月"]}
+{"id":"s23","cat":"计费退款","q":"五天无理由退款每个账号每年能享受几次？","must_contain":["1 次","1次"]}
+{"id":"s24","cat":"计费退款","q":"非全额退订要收多少比例的手续费？","must_contain":["15%"]}
+{"id":"s25","cat":"计费退款","q":"按量付费实例欠费停机后数据保留多长时间？","must_contain":["15 天","15天"]}
+{"id":"s26","cat":"计费退款","q":"包年包月实例一次买三年的折扣是多少？","must_contain":["5.5 折","5.5折","5 折","5折"]}
+{"id":"s27","cat":"计费退款","q":"按使用流量计费时，入网流量怎么收费？","must_contain":["入网流量免费","入网流量 (Inbound) 免费","免费"]}
+
+{"id":"s28","cat":"网络安全","q":"一块弹性网卡最多能加入几个安全组？","must_contain":["5 个安全组","5个安全组"]}
+{"id":"s29","cat":"网络安全","q":"跨VPC默认互通吗？需要配置什么才能打通？","must_contain":["CEN"]}
+{"id":"s30","cat":"网络安全","q":"EIP 能否跨地域绑定到其他地域的实例上？","must_contain":["严禁跨地域","不能跨地域","跨地域绑定"]}
