@@ -1,0 +1,13 @@
+payload = 'x" or user_id != "x'
+
+--- qa_semantic_cache ---
+  基线 user_id == "user_1001"  -> 4 行
+  全表                               -> 12 行
+  未转义 user_id == "x" or user_id != "x"  -> 12 行
+  已转义 user_id == "x\" or user_id != \"x"  -> 0 行
+
+--- long_term_memory ---
+  基线 user_id == "user_1001"  -> 0 行
+  全表                               -> 0 行
+  未转义 user_id == "x" or user_id != "x"  -> 0 行
+  已转义 user_id == "x\" or user_id != \"x"  -> 0 行

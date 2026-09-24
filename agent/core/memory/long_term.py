@@ -156,10 +156,14 @@ class LongTermMemory:
             return []
         try:
             query_embedding = await self._embeddings.aembed_query(query)
+            # user_id 一路来自客户端请求体且没有鉴权，直接拼进过滤表达式会被
+            # 'x" or user_id != "x' 这类取值绕过、读到别人的偏好（偏后又会被注入
+            # System Prompt）。转义引号与 app/infra/cache.py 的做法保持一致。
+            safe_user = user_id.replace('"', '\\"')
             results = self._client.search(
                 collection_name=COLLECTION_NAME,
                 data=[query_embedding],
-                filter=f'user_id == "{user_id}"',
+                filter=f'user_id == "{safe_user}"',
                 limit=top_k,
                 output_fields=["content", "memory_type"],
             )
