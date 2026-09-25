@@ -5,8 +5,12 @@
 - **直接调用被验证的那个函数本身**（import `mcp_servers/cloud_platform_server.py` 里的
   `generate_ai_poster`），不是另写一份等价请求——这样验的是实际跑在链路里的那段代码。
 - **必须把 PNG 下下来**：接口返回的是有效期约 24 小时的临时 URL，URL 本身不能当产物。
-- `NO_PROXY` 要在 import requests 之前设：用户机器开着本地代理，会把 DashScope 请求塞进去
+- `NO_PROXY` 要在 import requests 之前设：本机开着本地代理，会把 DashScope 请求塞进去
   并撞 SSLCertVerificationError。
+
+范围：这份证据证的是 `generate_ai_poster` **这个函数**端到端可用（真调 DashScope、真出图），
+不含 MCP stdio 那一段（客户端按名字发现工具 → 协议调用 → 取回结果）。那一段由
+`promotion_agent.py` 的 target_tools + 提示词接线，本脚本不复现。
 
 付费调用：一次 qwen-image-2.0 生成（1536*2688）。
 用法: python data/eval/verify_poster.py
@@ -37,8 +41,9 @@ PROMPT = "赛博朋克风格的服务器机房，炫酷的蓝色霓虹灯，科�
 
 
 def load_poster_tool():
-    # cloud_platform_server 顶层 import pymysql，但海报工具不碰 MySQL；
-    # 本机解释器没装 pymysql，塞个占位模块即可，不影响被验的那段代码。
+    # cloud_platform_server 顶层 import pymysql，但海报工具不碰 MySQL。
+    # 全量依赖（含 pymysql 等外部服务的驱动）装在跑服务的那套环境里；本机只做这类离线
+    # 单点验证，塞个占位模块把顶层 import 绕过去即可，不影响被验的那段代码。
     if importlib.util.find_spec("pymysql") is None:
         stub = types.ModuleType("pymysql")
         stub.cursors = types.SimpleNamespace(DictCursor=object)

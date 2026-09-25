@@ -21,7 +21,7 @@ import sys
 import time
 from pathlib import Path
 
-# 必须在 import requests/httpx 之前设：用户机器上开着本地代理（127.0.0.1:26561），
+# 必须在 import requests/httpx 之前设：本机开着本地代理（127.0.0.1:26561），
 # requests/httpx 会读系统代理把*本机*请求也塞进去，代理无法路由 localhost 就回 404，
 # 表现为「后端整站 404」的假象。DashScope 的 embedding 走代理还会撞
 # SSLCertVerificationError（代理 MITM，certifi 不认它的 CA）。

@@ -22,7 +22,7 @@ import os
 import sys
 from pathlib import Path
 
-# 必须在 import requests/httpx 之前设：用户机器上开着本地代理，requests/httpx 会读
+# 必须在 import requests/httpx 之前设：本机开着本地代理，requests/httpx 会读
 # 系统代理，把 DashScope 的 embedding 请求塞进去并撞 SSLCertVerificationError。
 os.environ["NO_PROXY"] = "*"
 os.environ["no_proxy"] = "*"
