@@ -17,6 +17,7 @@
 | `verify_ltmem.txt` | `verify_ltmem_write.py` | 长期记忆**写路径**验证（抽取 → 落库 → 回读） |
 | `verify_ltmem_isolation.txt` | `verify_ltmem_isolation.py` | 长期记忆的跨用户隔离验证（本人能查到、拿他人 user_id 查不到） |
 | `verify_cache_isolation.txt` | `verify_cache_isolation.py` | 语义缓存的跨用户隔离验证（含「公共域条目仍可见」的对照，排除缓存整体失效） |
+| `verify_poster.txt` + `poster_sample.png` | `verify_poster.py` | MCP 工具 `generate_ai_poster` 真出图的证据（一次调用 status=200，图已缩至 600*1050 入库） |
 | `probe_filter_injection.txt` | `probe_filter_injection.py` | 过滤表达式注入探针 |
 | `probe_ltmem.txt` | `probe_ltmem.py` | Milvus 集合清单与 row count 快照 |
 | `scan_dead_wiring.txt` | `scan_dead_wiring.py` | 未接线代码静态扫描 |
