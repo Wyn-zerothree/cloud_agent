@@ -1,0 +1,18 @@
+available = True
+造数据：probe_cache_owner 的私有条目 1 行（应为 1）
+         公共域条目 1 行（应为 1）
+
+① 本人取自己的私有条目 -> {'answer': '探针私有答案：登录控制台即可查看。', 'matched_question': '探针私有问句：我的实例到期时间怎么查', 'level': 'L1_EXACT', 'distance': 0.0}
+   期望命中、且答案是私有答案：通过
+
+② 侵入者拿同一句话取 -> None
+   期望为 None（此句与公共条目语义无关，所以走过语义那级也取不到）：通过
+
+③ 对照：侵入者取公共域条目 -> L1_EXACT
+   期望命中，用来排除「缓存整个坏了所以②才取不到」：通过
+
+机制：按 get_cache 精确那级的条件，同一条私有记录对不同用户的可见行数
+  user_id == 'probe_cache_owner'    -> 1 行
+  user_id == 'probe_cache_intruder' -> 0 行
+
+清理后：私有条目 0 行 | 公共条目 0 行

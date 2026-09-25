@@ -298,7 +298,8 @@ mock_data/                      # RAG 用的产品/账单/工单示例文档
 | 探针 | 脚本 | 结论 |
 |---|---|---|
 | 长期记忆写路径 | `verify_ltmem_write.py` | 抽取 6 条偏好 → 去重落 Milvus 6 行 → 回读 3 条 |
-| 跨用户隔离 | `verify_ltmem_isolation.py` | 本人检索 2 条；拿他人 `user_id` 注入取值检索 **0 条** |
+| 跨用户隔离（长期记忆） | `verify_ltmem_isolation.py` | 本人检索 2 条；拿他人 `user_id` 注入取值检索 **0 条** |
+| 跨用户隔离（语义缓存） | `verify_cache_isolation.py` | 本人命中私有条目；他人同句取不到（走过语义那级也取不到），公共域条目对其仍可见 |
 | 过滤表达式注入 | `probe_filter_injection.py` | 未转义 payload 命中全表 12 行；**转义后 0 行** |
 | 未接线代码扫描 | `scan_dead_wiring.py` | 定义 85 个 / 零调用 18 个 / 可疑 2 个 |
 | 存储探针 | `probe_stores.py` | 列出 7 个 collection 的行数与字段 schema |
