@@ -109,7 +109,7 @@ flowchart LR
 
 orchestrator 只做一次 LLM 分类就交给下游 Agent，不做多轮规划。这是**客服场景的合理选择**：用户问题通常是单意图的，多步规划带来的延迟和不确定性大于收益。
 
-代价是状态极简 —— `AgentState` 只有 7 个字段（对比 Pipeline 模式需要的 40+）。**状态复杂度由拓扑决定，不是设计冗余。**
+代价是状态极简 —— `AgentState` 只有 6 个字段（对比 Pipeline 模式需要的 39 个）。**状态复杂度由拓扑决定，不是设计冗余。**
 
 ### 2. MCP 协议落地
 
@@ -212,7 +212,7 @@ python app/preload_cache.py                   # 预热 L1 语义缓存
 agent/                          # CLI 与 Agent 主体
 ├── core/workflow/
 │   ├── graph_manager.py        # LangGraph 构建 + 条件路由
-│   └── state.py                # AgentState（7 字段）
+│   └── state.py                # AgentState（6 字段）
 ├── agents/
 │   ├── orchestrator.py         # LLM 意图分类路由
 │   ├── billing_agent.py        # MCP 客户端 + UserIdInjector 拦截器
